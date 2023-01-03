@@ -7,7 +7,6 @@ import { UsersModule } from './users/users.module';
 @Module({
     controllers: [],
     providers: [],
-    
     imports: [
         ConfigModule.forRoot({
             envFilePath: '.env'
