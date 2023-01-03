@@ -1,4 +1,6 @@
-import {Model,Table,Column,DataType} from 'sequelize-typescript'
+import {Model,Table,Column,DataType,BelongsToMany } from 'sequelize-typescript'
+import { Role } from 'src/roles/roles.model';
+import { UserRoles } from '../roles/user-roles.model';
 
 interface UserCreationAttrs{
     email: string,
@@ -7,7 +9,7 @@ interface UserCreationAttrs{
 
 @Table({tableName: 'users'})
 
-export class User extends Model<User>{
+export class User extends Model<User,UserCreationAttrs>{
 
     @Column({type: DataType.INTEGER,unique: true,autoIncrement: true,primaryKey: true})
     id: number;
@@ -23,4 +25,7 @@ export class User extends Model<User>{
 
     @Column({type: DataType.STRING,unique: true,allowNull: true})
     banReason: string;
+
+    @BelongsToMany(()=> Role, ()=>UserRoles)
+    roles: Role[]
 }
