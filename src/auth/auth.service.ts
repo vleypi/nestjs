@@ -21,7 +21,7 @@ export class AuthService {
     async registartion(userDto: CreateUserDto){
         const candidate = await this.userService.getUserByEmail(userDto.email)
 
-        if(candidate){
+        if(!!candidate){
             throw new HttpException('Пользователь с таким email уже существует', HttpStatus.BAD_REQUEST)
         }  
 
